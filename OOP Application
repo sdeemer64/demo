@@ -1,0 +1,143 @@
+<?php
+
+interface RemoteControl {
+
+public function powerOn ();
+
+}
+
+class Television {
+
+public function setPower ( $state ) {
+
+// Truncated Code
+
+}
+
+}
+
+class CableBox {
+
+public function setPower ( $state ) {
+
+// Truncated Code
+
+}
+
+}
+
+class TVRemote implements RemoteControl
+
+{
+
+private $tv;
+
+public function __construct ( Television $tv ) {
+
+$this -> tv = $tv;
+
+}
+
+public function powerOn () {
+
+$this -> tv -> setPower ( true );
+
+}
+
+}
+
+
+
+
+
+/*
+
+OOP Application
+
+Without altering the given code :
+
+● Represent a universal remote that can turn on a television and a cable box.
+
+● Represent a remote control user which can push the `power on’ button of a remote control.
+
+● Have a remote control user push the `power on’ button of a tv remote.
+
+● Have the same remote control user push the `power on’ button of a universal remote.
+
+*/
+
+
+
+
+
+/* answer 1 */
+
+class universalRemote extends TVRemote{
+
+private $tv;
+
+private $cab;
+
+public function __construct() {
+
+$this->tv = new Television;
+
+$this->cab = new CableBox;
+
+}
+
+public function powerOn () {
+
+$this->tv->setPower( true );
+
+$this->cab->setPower( true );
+
+}
+
+public function TVpowerOn () {
+
+$this->tv->setPower( true );
+
+}
+
+}
+
+
+
+/* answer 2 */
+
+class remoteUser{
+
+private $universalRemote;
+
+public function __construct() {
+
+$this->universalRemote = new universalRemote;
+
+}
+
+public function pushAll() {
+
+$this->universalRemote->powerOn();
+
+}
+
+public function pushTv() {
+
+$this->universalRemote->TVpowerOn();
+
+}
+
+}	
+
+
+
+$remoteUser=new remoteUser;
+
+/* answer 3 */
+
+$remoteUser->pushTv();
+
+/* answer 4 */
+
+$remoteUser->pushAll();
